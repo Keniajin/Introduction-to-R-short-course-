@@ -1,0 +1,23 @@
+---
+title: "Practical 2 (Try it Out)"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Create a new variable
+
+1) Read in the birthweight data
+2) Create a new variable `lbw` with these conditions
+  - if `bweight<2500` then `lbw is Weight<2500` 
+  - if `bweight>=2500` then `lbw is Normal 2500+` 
+  
+  
+## GGplot
+
+1) Do a boxplot of `lbw` vs `gestwks` and use classic theme
+2) Do a boxplot of `lbw` vs `gestwks` and use classic theme and `facet` by `agegrp`
