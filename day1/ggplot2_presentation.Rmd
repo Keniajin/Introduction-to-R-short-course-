@@ -1,11 +1,9 @@
 ---
-title: "Graphics with with ggplot2"
-output:
-  slidy_presentation: default
-  beamer_presentation: default
-  ioslides_presentation: default
+title: "Introduction to ggplot2"
+author: "Ken Mwai"
+date: "3/16/2021"
+output: pdf_document
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       tidy = TRUE,
