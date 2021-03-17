@@ -15,7 +15,6 @@ bw <- read.csv("birthweight2.csv", header=T)
 bw <- bw %>%
   mutate(new_lbw= ifelse(bweight>2900, 2,1))
 
-
 # test whether there is a significant difference between proportion of low birth-weight in males versus females
 
 tbl_sex <- table(bw$sex,bw$new_lbw )
