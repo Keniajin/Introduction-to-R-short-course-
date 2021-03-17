@@ -1,5 +1,4 @@
-setwd()
-
+#setwd()
 
 # CALCULATING RATES 
 
