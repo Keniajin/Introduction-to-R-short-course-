@@ -1,8 +1,6 @@
 #setwd()
 
 # CALCULATING RATES 
-
-
 # 1.0 Load packages
 library(foreign)
 library(epiDisplay)
@@ -54,8 +52,6 @@ upper.bound
 
 
 # COMPARING TWO RATES
-
-
 # 7.0 Rate difference: Males vs. Females
 
 # 7.1 Calculate number of deaths for each gender: male and female
