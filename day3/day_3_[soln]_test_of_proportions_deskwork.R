@@ -6,6 +6,7 @@ setwd("~/Dropbox/MYFILES/3. Consultancies/PwaniUni/2021_MPH_R/Introduction-to-R-
 # Load required packages
 library(dplyr)
 library(freqtables)
+library(epiDisplay)
 
 
 # load dataset
@@ -13,7 +14,7 @@ bw <- read.csv("birthweight2.csv", header=T)
 
 # use dplyr to create new categorical variable classifying children as low birth weight (<2900g) and normal birth weight (>=2900g)
 bw <- bw %>%
-  mutate(new_lbw= ifelse(bweight>2900, 2,1))
+  mutate(new_lbw= ifelse(bweight>=2900, 2,1))
 
 # test whether there is a significant difference between proportion of low birth-weight in males versus females
 
@@ -38,4 +39,14 @@ bw %>%
   ## select only variables containing row
   select(contains('row'))
 
+
+
+
+# test whether there is a significant association between new lbw and age group
+
+chisq.test(bw$agegrp, bw$new_lbw, correct = T)
+
+# test the association between sex of the baby and lbw using OR as the preferred measure of effect
+
+cc(bw$sex, bw$new_lbw)
 
