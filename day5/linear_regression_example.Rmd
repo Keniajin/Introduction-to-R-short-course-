@@ -1,0 +1,44 @@
+---
+title: "Linear Regression Examples"
+author: "Ken Mwai"
+date: "3/19/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+library(haven)
+```
+
+## Data 
+1.	We are going to use a dataset from an HIV study. Read the dataset “hivinfection weight” into R We will be using the variables: 
+  a.	Weight -  child birth weight
+  b.	CD4 – maternal CD4 count at delivery
+  c.	Momhb – Maternal Haemoglobin levels at delivery
+  d.	ga_weeks – gestational age at delivery/birth
+  e.	hiv_status – Child’s HIV status at birth
+  f.	sex  - the sex of the child
+  
+2.	The primary research question is __“Is child birth weight associate with maternal CD4 count at birth?”__
+
+3.	What other questions would be worth asking in this study based on the variables given? 
+
+4.	Let’s define these questions and use these questions to base our practical
+
+
+## Child birth weight associate with maternal CD4 count
+
+```{r}
+hiv_df <- read_dta(file = "hivdata.dta")
+
+## structure of the data
+glimpse(hiv_df)
+```
+
+
+

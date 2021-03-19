@@ -1,5 +1,5 @@
 library(tidyverse)
-
+library(epiDisplay)
 ## read in the data
 # Read in CSV data 
 onch <-read_csv("onchall.csv")
@@ -14,6 +14,8 @@ exp(coef(m1))
 # and show their CIs   #
 exp(confint(m1))  
 
+## display
+logistic.display(m1)
 
 ## model 2 adjusting for the age as a confounder
 m2 <- glm(mf ~ area  + as.factor(agegrp), data=onch, family=binomial) # Fit the model
@@ -25,4 +27,4 @@ exp(coef(m2))
 # and show their CIs
 exp(confint(m2))  
 
-
+logistic.display(m2)

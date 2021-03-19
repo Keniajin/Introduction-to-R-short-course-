@@ -1,0 +1,32 @@
+---
+title: "Linear regression practical"
+author: "Ken Mwai"
+date: "3/19/2021"
+output: pdf_document
+---
+
+## Linear regression practical 
+
+1.	We are going to use a dataset from an HIV study. Read the dataset “hivdata.dta” ( __hint: use the haven package to read the data___ ) into R.
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(haven)
+```
+
+
+The data had the following variables: 
+  a.	weight_kg -  child birth weight
+  b.	cd4 – maternal CD4 count at delivery
+  c.	momhb – Maternal Haemoglobin levels at delivery
+  d.	ga_weeks – gestational age at delivery/birth
+  e.	hiv_status – Child’s HIV status at birth
+  f.	sex  - the sex of the child
+  
+2.	The primary research question is __“Is child birth weight associated with maternal HIV status?”__
+
+- Adjust for any confounders and fit a multi-variable model. Show how the model improves with adjusting for extra variables
+
+3.	The primary research question is __“Is child birth weight associated with maternal CD4 count at birth?”__
+
+- Adjust for any confounders and fit a multi-variable model. Show how the model improves with adjusting for extra variables
