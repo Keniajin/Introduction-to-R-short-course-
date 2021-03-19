@@ -28,3 +28,16 @@ exp(coef(m2))
 exp(confint(m2))  
 
 logistic.display(m2)
+
+
+## model 3 adjusting for the age as a confounder and interaction with lesion
+m3 <- glm(mf ~ area  + as.factor(agegrp)*as.factor(lesions), data=onch, family=binomial) # Fit the model
+# Show model results
+summary(m3)
+
+# transform the coeffs into ORs #
+exp(coef(m3))
+# and show their CIs
+exp(confint(m3))  
+
+logistic.display(m3)
