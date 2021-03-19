@@ -1,7 +1,5 @@
 library(tidyverse)
-
 ## read in the babies 
-
 bw <- read_csv("babies.csv")
 
 ## check the structure of the data 
@@ -36,14 +34,13 @@ ggplot(data = bw ,mapping = aes(x = matage,
        subtitle = "Bith weight is in grams")+
   theme_bw()
 
-
 ## draw a graph of mutiple correlations
 ## only the numeric data
 library("PerformanceAnalytics")
 
 ## select the continous variables only
 bw_numeric <- bw %>% 
-  select(matage,hyp,gestwks,bweight)
+  dplyr::select(matage,hyp,gestwks,bweight)
 
 chart.Correlation(bw_numeric, histogram=TRUE, pch=19,
                   method = "pearson")
