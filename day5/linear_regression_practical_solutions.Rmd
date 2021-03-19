@@ -1,0 +1,187 @@
+---
+title: "Linear Regression Practical Overview"
+author: "Ken Mwai"
+date: "3/19/2021"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#options(scipen=999)
+options(scipen = 999, digits =4) #set to two decimal 
+```
+
+
+```{r}
+library(tidyverse)
+library(haven)
+library(broom)## tidy model reports
+```
+
+## Data 
+1.	We are going to use a dataset from an HIV study. Read the dataset “hivinfection weight” into R We will be using the variables: 
+  a.	weight_kg -  child birth weight
+  b.	cd4 – maternal CD4 count at delivery
+  c.	momhb – Maternal Haemoglobin levels at delivery
+  d.	ga_weeks – gestational age at delivery/birth
+  e.	hiv_status – Child’s HIV status at birth
+  f.	sex  - the sex of the child
+  
+2.	The primary research question is __“Is child birth weight associated with child HIV status?”__
+
+- Adjust for any confounders and fit a multi-variable model
+
+3.	The primary research question is __“Is child birth weight associated with maternal CD4 count at birth?”__
+
+- Adjust for any confounders and fit a multi-variable model
+
+## Child birth weight associate with maternal HIV status
+
+```{r}
+hiv_df <- read_dta(file = "hivdata.dta")
+
+## structure of the data
+glimpse(hiv_df)
+```
+
+
+## Fitting the model
+
+```{r}
+lm1 <- lm(weight_kg ~ hiv_status , data = hiv_df)
+summary(lm1)
+```
+
+
+## Diagnostic plots for model 1
+
+```{r}
+par(mfrow = c(2, 2))
+plot(lm1)
+```
+
+
+### Tidy model
+
+```{r}
+confint(lm1)
+tidy(lm1 ,  conf.int = T )
+```
+
+### Extract the AIC
+
+```{r}
+glance_lm1 <- glance(lm1)
+glance_lm1
+```
+
+## Report
+
+On average we observe that the HIV positive individuals have a significantly lower birth weight of 0.18kg (95% C.I =(-0.33,	-0.03), pval=0.01)  compared to the HIV negative individuals. 
+
+
+### Adjsut for gestation weeks
+
+```{r}
+lm2 <- lm(weight_kg ~ hiv_status + ga_weeks , data = hiv_df)
+confint(lm2)
+tidy(lm2 , conf.int = T )
+```
+
+## Diagnostic plots for model 2
+
+```{r}
+par(mfrow = c(2, 2))
+plot(lm2)
+```
+
+
+```{r}
+glance_lm2 <- glance(lm2)
+glance_lm2
+```
+
+
+## Interaction predictors
+
+```{r}
+##https://cran.r-project.org/web/packages/interactions/vignettes/interactions.html
+lm3 <- lm(weight_kg ~ hiv_status + ga_weeks + hiv_status*ga_weeks , data = hiv_df)
+tidy(lm3 , conf.int = T )
+```
+
+
+## Diagnostic plots for model 3
+
+```{r}
+par(mfrow = c(2, 2))
+plot(lm3)
+```
+
+## Child birth weight associate with maternal CD4 count
+
+Check if there is a linear association between the outcome and the predictor
+
+```{r}
+ggplot(data = hiv_df ,mapping = aes(x = cd4,
+                                y = weight_kg )) +
+  #Add a point geom
+  geom_point() +
+  ##Make it straight
+  geom_smooth(method = "lm") +
+  ## add labels
+  labs(x = "Maternal CD4 count", y = "Birthweight (kgs)",
+       title = "Birth weight by maternal CD4 count")+
+  theme_bw()
+
+```
+
+
+
+```{r}
+lm4 <- lm(weight_kg ~ cd4  , data = hiv_df)
+#confint(lm4)
+broom::tidy(lm4 , conf.int = T )
+```
+
+
+- Diagnostic plots model 4 ?? . We create a CD4 count in 100's
+
+
+```{r}
+hiv_df <- hiv_df %>% 
+  mutate(cd4_100=cd4/100)
+```
+
+
+
+```{r}
+lm5 <- lm(weight_kg ~ cd4_100 , data = hiv_df)
+#confint(lm4)
+broom::tidy(lm5 , conf.int = T ) 
+```
+
+
+## Adjust for confounders
+
+```{r}
+lm6 <- lm(weight_kg ~ cd4_100 + sex + ga_weeks +momhb , data = hiv_df)
+#confint(lm4)
+
+```
+
+- Check how the sample size reduces if you fit the model using a predictor with missing data points. Compare model `lm6` and `lm5`
+
+
+```{r}
+summary(lm6)
+```
+
+
+```{r}
+summary(lm5)
+```
+

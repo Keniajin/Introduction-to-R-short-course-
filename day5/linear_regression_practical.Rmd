@@ -27,6 +27,6 @@ The data had the following variables:
 
 - Adjust for any confounders and fit a multi-variable model. Show how the model improves with adjusting for extra variables
 
-3.	The primary research question is __“Is child birth weight associated with maternal CD4 count at birth?”__
+3.	Another research question is __“Is child birth weight associated with maternal CD4 count at birth?”__
 
 - Adjust for any confounders and fit a multi-variable model. Show how the model improves with adjusting for extra variables
